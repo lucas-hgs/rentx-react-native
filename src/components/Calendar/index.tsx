@@ -18,6 +18,8 @@ LocaleConfig.defaultLocale = 'pt-br';
 
 export function Calendar(){
   const theme = useTheme();
+  const newDate = new Date();
+  const currentDate = `${newDate.getFullYear()}/${newDate.getMonth() + 1}/${newDate.getDate()}`;
 
   return (
     <CustomCalendar 
@@ -50,7 +52,7 @@ export function Calendar(){
       }}
 
       firstDay={1}
-      minDate={new Date}
+      minDate={currentDate}
     />
   );
 }
