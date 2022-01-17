@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import Logo from '../../assets/logo.svg';
@@ -15,6 +16,8 @@ import {
 } from './styles';
 
 export function Home(){
+  const { navigate }:NavigationProp<ParamListBase> = useNavigation();
+
   const carData = {
     brand: 'Audi',
     name: 'RS 5 Coupé',
@@ -23,6 +26,10 @@ export function Home(){
       price: 120,
     },
     thumbnail: 'https://cdn.wheel-size.com/automobile/body/audi-rs5-2020-2022-1613028936.4473815.png'
+  }
+
+  function handleCarDetails() {
+    navigate('CarDetails');
   }
 
   return (
@@ -43,7 +50,7 @@ export function Home(){
       <CarList 
         data={[1, 2, 3]}
         keyExtractor={item => String(item)}
-        renderItem={({ item }) => <Car data={carData} />}
+        renderItem={({ item }) => <Car data={carData} onPress={handleCarDetails} />}
       />
     </Container>
   );

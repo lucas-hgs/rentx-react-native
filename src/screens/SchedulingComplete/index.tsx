@@ -1,5 +1,6 @@
 import React from 'react';
-import { useWindowDimensions } from 'react-native';
+import { StatusBar, useWindowDimensions } from 'react-native';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 
 import { ConfirmButton } from '../../components/ConfirmButton';
 
@@ -17,8 +18,19 @@ import {
 export function SchedulingComplete(){
   const { width } = useWindowDimensions();
 
+  const { navigate }:NavigationProp<ParamListBase> = useNavigation();
+
+  function handleCompleteCarRent() {
+    navigate('Home');
+  }
+
   return (
     <Container>
+      <StatusBar 
+        barStyle='light-content'
+        translucent
+        backgroundColor='transparent'
+      />
       <LogoSvg width={width} />
 
       <Content>
@@ -34,7 +46,7 @@ export function SchedulingComplete(){
       </Content>
 
       <Footer>
-        <ConfirmButton title="OK" />
+        <ConfirmButton title="OK" onPress={handleCompleteCarRent} />
       </Footer>
 
     </Container>
