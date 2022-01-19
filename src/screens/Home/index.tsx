@@ -23,18 +23,8 @@ export function Home(){
   const [loading, setLoading] = useState(true);
   const { navigate }:NavigationProp<ParamListBase> = useNavigation();
 
-  const carData = {
-    brand: 'Audi',
-    name: 'RS 5 Coupé',
-    rent: {
-      period: 'AO DIA',
-      price: 120,
-    },
-    thumbnail: 'https://cdn.wheel-size.com/automobile/body/audi-rs5-2020-2022-1613028936.4473815.png'
-  }
-
-  function handleCarDetails() {
-    navigate('CarDetails');
+  function handleCarDetails(car: CarDTO) {
+    navigate('CarDetails', { car });
   }
 
   useEffect(() => {
@@ -71,7 +61,7 @@ export function Home(){
         <CarList 
           data={cars}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <Car data={item} onPress={handleCarDetails} />}
+          renderItem={({ item }) => <Car data={item} onPress={() => handleCarDetails(item)} />}
         />
       }
     </Container>
