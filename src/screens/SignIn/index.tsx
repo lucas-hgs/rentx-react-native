@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 
 import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
 
 import theme from '../../styles/theme';
 
@@ -10,6 +11,7 @@ import {
   Header,
   Title,
   SubTitle,
+  Form,
   Footer
 } from './styles';
 
@@ -33,6 +35,9 @@ export function SignIn(){
         </SubTitle>
       </Header>
 
+      <Form>
+        <Input iconName='mail' />
+      </Form>
 
       <Footer>
         <Button 
