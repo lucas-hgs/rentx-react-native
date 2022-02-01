@@ -30,7 +30,7 @@ export function SignUpSecondStep() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const { goBack }:NavigationProp<ParamListBase> = useNavigation();
+  const { goBack, navigate }:NavigationProp<ParamListBase> = useNavigation();
   const route = useRoute();
   const theme = useTheme();
 
@@ -48,6 +48,12 @@ export function SignUpSecondStep() {
     if(!password != !passwordConfirm) {
       return Alert.alert('As senhas precisam ser iguais.')
     }
+
+    navigate('Confirmation', {
+      nextScreenRoute: 'SignIn',
+      title: 'Conta Criada!',
+      message: `Agora é só fazer login\ne aproveitar.`
+    })
   }
 
   return (
