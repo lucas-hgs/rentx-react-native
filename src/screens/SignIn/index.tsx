@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
+
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
@@ -27,6 +29,8 @@ export function SignIn(){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { navigate }:NavigationProp<ParamListBase> = useNavigation();
+
   async function handleSignIn() {
     try {
       const schema = Yup.object().shape({
@@ -42,6 +46,10 @@ export function SignIn(){
         Alert.alert('Erro na autenticação', 'Ocorreu um erro ao fazer login, verifique as credenciais')
       }
     }
+  }
+
+  function handleNewAccount() {
+    navigate('SignUpFirstStep');
   }
   
   return (
@@ -94,7 +102,7 @@ export function SignIn(){
 
             <Button 
               title='Criar conta gratuita'
-              onPress={() => {}}
+              onPress={handleNewAccount}
               enabled={false}
               loading={false}
               color={theme.colors.background_secondary}
