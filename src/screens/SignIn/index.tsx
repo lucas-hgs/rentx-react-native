@@ -49,6 +49,7 @@ export function SignIn(){
   }
 
   function handleNewAccount() {
+    console.log('fui apertado')
     navigate('SignUpFirstStep');
   }
   
@@ -103,7 +104,7 @@ export function SignIn(){
             <Button 
               title='Criar conta gratuita'
               onPress={handleNewAccount}
-              enabled={false}
+              enabled={true}
               loading={false}
               color={theme.colors.background_secondary}
               light

@@ -24,6 +24,7 @@ export function Button({title, color, onPress, enabled = true, loading = false, 
       color={color} 
       enabled
       style={{ opacity: (enabled === false || loading === true) ? .5 : 1 }}
+      onPress={onPress}
     >
       {
         loading ? <ActivityIndicator color={theme.colors.shape} /> :
