@@ -38,7 +38,7 @@ export function Splash(){
   });
   
   function startApp() {
-    navigate('Home');
+    navigate('SignIn');
   }
 
   const logoStyle = useAnimatedStyle(() => {
