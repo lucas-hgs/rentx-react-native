@@ -54,7 +54,6 @@ export function SignIn(){
   }
 
   function handleNewAccount() {
-    console.log('fui apertado')
     navigate('SignUpFirstStep');
   }
   
