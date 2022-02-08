@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 interface OptionProps {
@@ -14,9 +14,7 @@ export const Container = styled.View`
 export const Header = styled.View`
   width: 100%;
   height: 227px;
-
   background-color: ${({ theme }) => theme.colors.header};
-
   padding: 0 24px;
   align-items: center;
 `;
@@ -26,7 +24,6 @@ export const HeaderTop = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
   margin-top: ${getStatusBarHeight() + 32}px;
 `;
 
@@ -42,7 +39,6 @@ export const PhotoContainer = styled.View`
   width: 180px;
   height: 180px;
   border-radius: 90px;
-
   background-color: ${({ theme }) => theme.colors.shape};
   margin-top: 48px;
 `;
@@ -56,12 +52,9 @@ export const Photo = styled.Image`
 export const PhotoButton = styled(RectButton)`
   width: 40px;
   height: 40px;
-
   background-color: ${({ theme }) => theme.colors.main};
-
   justify-content: center;
   align-items: center;
-
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -74,25 +67,28 @@ export const Content = styled.View`
 
 export const Options = styled.View`
   border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.colors.line}
-
+  border-bottom-color: ${({ theme }) => theme.colors.line};
   flex-direction: row;
   justify-content: space-around;
+  margin-bottom: 24px;
 `;
 
 export const Option = styled.TouchableOpacity<OptionProps>`
   padding-bottom: 14px;
-
-  ${({ active }) => active && css`
-    border-bottom-width: 3px;
-    border-bottom-color: ${({ theme }) => theme.colors.main};
-  `} 
+  ${({ active }) =>
+    active &&
+    css`
+      border-bottom-width: 2px;
+      border-bottom-color: ${({ theme }) => theme.colors.main};
+    `}
 `;
 
 export const OptionTitle = styled.Text<OptionProps>`
   font-size: ${RFValue(20)}px;
-  font-family: ${({ theme, active }) => active ? theme.fonts.secondary_600 : theme.fonts.secondary_500};
-  color: ${({ theme, active }) => active ? theme.colors.header : theme.colors.text_detail};
+  font-family: ${({ theme, active }) =>
+    active ? theme.fonts.secondary_600 : theme.fonts.secondary_500};
+  color: ${({ theme, active }) =>
+    active ? theme.colors.header : theme.colors.text_detail};
 `;
 
 export const Section = styled.View``;
