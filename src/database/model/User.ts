@@ -1,5 +1,5 @@
-import { Model } from "@nozbe/watermelondb";
-import { field } from '@nozbe/watermelondb/decorators';
+import { Model } from '@nozbe/watermelondb';
+import { field } from '@nozbe/watermelondb/decorators'
 
 class User extends Model {
   static table = 'users'
@@ -15,7 +15,7 @@ class User extends Model {
 
   @field('driver_license')
   driver_license!: string;
-
+  
   @field('avatar')
   avatar!: string;
 

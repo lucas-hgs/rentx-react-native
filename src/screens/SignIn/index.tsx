@@ -1,80 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { 
-  StatusBar,
-  KeyboardAvoidingView,
+  StatusBar, 
+  KeyboardAvoidingView, 
   TouchableWithoutFeedback,
   Keyboard,
   Alert
-} from 'react-native';
+} from 'react-native'
 import * as Yup from 'yup';
-
-import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
-
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
-import { PasswordInput } from '../../components/PasswordInput';
-
-import theme from '../../styles/theme';
-import { useAuth } from '../../hooks/auth';
-
 import {
   Container,
   Header,
   Title,
-  SubTitle,
   Form,
-  Footer
-} from './styles';
+  SubTitle,
+  Footer,
+} from './styles'
+
+import { Button } from '../../components/Button'
+import { Input } from '../../components/Input'
+import { PasswordInput } from '../../components/PasswordInput'
+
+import { useAuth } from '../../hooks/auth'
+
+import theme from '../../styles/theme'
 
 export function SignIn(){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation<any>();
 
-  const { navigate }:NavigationProp<ParamListBase> = useNavigation();
+  const { signIn } = useAuth()
 
-  const { signIn } = useAuth();
-
-  async function handleSignIn() {
+  async function handleSignIn(){
     try {
       const schema = Yup.object().shape({
-        email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
-        password: Yup.string().required('A senha é obrigatória')
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string()
+          .required('A senha é obrigatória')
       });
-
+  
       await schema.validate({ email, password });
 
       signIn({ email, password });
-    } catch(error) {
-      if(error instanceof Yup.ValidationError) {
-        Alert.alert('Ocorreu um problema', error.message)
+    } catch (error){
+      if (error instanceof Yup.ValidationError){
+        Alert.alert('Opa', error.message)
       } else {
-        Alert.alert('Erro na autenticação', 'Ocorreu um erro ao fazer login, verifique as credenciais')
+        Alert.alert(
+          'Error na autenticação', 
+          'Ocorreu um erro ao fazer login, verifique as credenciais'
+        )
       }
     }
   }
 
-  function handleNewAccount() {
-    navigate('SignUpFirstStep');
+  function handleNewAccount(){
+    navigation.navigate('SignUpFirstStep');
   }
-  
+
   return (
-    <KeyboardAvoidingView behavior='position' enabled>
+    <KeyboardAvoidingView behavior='position' enabled >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
-          <StatusBar 
-            barStyle='dark-content'
-            backgroundColor='transparent'
-            translucent
-          />
+          <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
           <Header>
-            <Title>
-              Estamos{'\n'}
-              quase lá.
-            </Title>
-
+            <Title>Estamos {'\n'}quase lá.</Title>
             <SubTitle>
-              Faça seu login para começar{'\n'}
-              uma experiência incrível.
+              Faça seu login para começar {'\n'}
+              uma experiência incrível
             </SubTitle>
           </Header>
 
@@ -85,37 +81,35 @@ export function SignIn(){
               keyboardType='email-address'
               autoCorrect={false}
               autoCapitalize='none'
-              onChangeText={setEmail}
               value={email}
+              onChangeText={setEmail}
             />
-
             <PasswordInput 
               iconName='lock'
               placeholder='Senha'
-              onChangeText={setPassword}
               value={password}
+              onChangeText={setPassword}
             />
           </Form>
-
+          
           <Footer>
             <Button 
-              title='Login'
+              title="Login"
               onPress={handleSignIn}
               enabled={true}
               loading={false}
             />
-
             <Button 
-              title='Criar conta gratuita'
+              title="Criar conta gratuita"
+              color={theme.colors.background_secondary}
+              light
               onPress={handleNewAccount}
               enabled={true}
               loading={false}
-              color={theme.colors.background_secondary}
-              light
             />
           </Footer>
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-  );
+  )
 }
