@@ -28,7 +28,7 @@ import {
 } from './styles';
 
 export function Profile(){
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [avatar, setAvatar] = useState(user.avatar);
@@ -42,16 +42,11 @@ export function Profile(){
     goBack();
   }
 
-  function handleSignOut() {
-
-  }
-
   function handleOptionChange(optionSelected : 'dataEdit' | 'passwordEdit') {
     setOption(optionSelected);
   }
 
   async function handleAvatarSelect() {
-    console.log('clicou aqui')
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -76,15 +71,19 @@ export function Profile(){
             <HeaderTop>
               <BackButton color={theme.colors.shape} onPress={handleBack} />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={handleSignOut}>
+              <LogoutButton onPress={signOut}>
                 <Feather name='power' size={24} color={theme.colors.shape} />
               </LogoutButton>
             </HeaderTop>
 
             <PhotoContainer>
-              {!!avatar && <Photo source={{ uri: avatar }} />}
+              { !!avatar && <Photo source={{ uri: avatar }} /> }
               <PhotoButton onPress={handleAvatarSelect}>
-                <Feather name='camera' size={24} color={theme.colors.shape} />
+                <Feather 
+                  name="camera"
+                  size={24}
+                  color={theme.colors.shape}
+                />
               </PhotoButton>
             </PhotoContainer>
           </Header>
