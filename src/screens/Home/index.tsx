@@ -46,7 +46,7 @@ export function Home(){
       },
       pushChanges: async ({ changes }) => {
         const user = changes.users;
-        await api.post('/users/sync', user);
+        await api.post('/users/sync', user).catch(console.log);
       }
     });
   }
@@ -76,6 +76,12 @@ export function Home(){
       isMounted = false;
     }
   }, []);
+
+  useEffect(() => {
+    if(netInfo.isConnected === true) {
+      offlineSynchronize();
+    }
+  }, [netInfo.isConnected])
 
   return (
     <Container>
