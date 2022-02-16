@@ -13,6 +13,8 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { PasswordInput } from '../../components/PasswordInput';
 
+import { useNetInfo } from '@react-native-community/netinfo';
+
 import {
   Container,
   Header,
@@ -38,6 +40,7 @@ export function Profile(){
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
 
   const theme = useTheme();
+  const netInfo = useNetInfo();
   const { goBack }:NavigationProp<ParamListBase> = useNavigation();
 
   function handleBack() {
@@ -45,7 +48,11 @@ export function Profile(){
   }
 
   function handleOptionChange(optionSelected : 'dataEdit' | 'passwordEdit') {
-    setOption(optionSelected);
+    if(netInfo.isConnected === false && optionSelected === 'passwordEdit') {
+      Alert.alert('Você está Offline', 'Para mudar a senha, conecte-se a internet!');
+    } else {
+      setOption(optionSelected);
+    }
   }
 
   async function handleAvatarSelect() {
