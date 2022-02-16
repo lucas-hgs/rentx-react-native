@@ -31,7 +31,7 @@ export function Home(){
   const netInfo = useNetInfo();
   const { navigate }:NavigationProp<ParamListBase> = useNavigation();
 
-  function handleCarDetails(car: CarDTO) {
+  function handleCarDetails(car: ModelCar) {
     navigate('CarDetails', { car });
   }
 
